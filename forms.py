@@ -6,16 +6,15 @@ class AddPetForm(FlaskForm):
     name = StringField('Pet Name',
                        validators=[InputRequired()])
     species = StringField('Species',
-                          validators=[InputRequired(), 
-                                      AnyOf(values=["cat", "dog", "porcupine"],
-                                            message="Must be a Cat, Dog, or Porcupine")])
+                          validators=[AnyOf(values=["cat", "dog", "porcupine", "Cat", "Dog", "Porcupine"],
+                                            message='Species must be a dog, cat, or porcupine')])
     photo_url = URLField('Enter a Photo Url',
                          validators=[Optional(),
-                                     url(message="Must be a valid URL")])
+                                     url(message="Must use a valid URL")])
     age = IntegerField('Age',
                        validators=[Optional(),
                                    NumberRange(min=0,
                                                max=30,
-                                               message="Only accepts up to 30 years old")])
+                                               message="Age can only be up to 30 years old")])
     notes = TextAreaField('Notes')
     available = BooleanField('Is your Pet available for adoption?')

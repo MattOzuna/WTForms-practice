@@ -1,19 +1,25 @@
 {% extends 'base.html'  %}
 {% block title %}
-Add Pet
+{{form.name.data}}
 {% endblock%}
 {% block content %}
-
 <div class="container">
-    <h1 class="display-1 text-center">Add Pet</h1>
+    <h1 class="display-1 text-center">{{pet.name}}</h1>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-    
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            
-            {% for field in form if field.widget.input_type != 'hidden'%}
-            {% if field.errors %}
+        <div class="col-md-3">
+            <img src="{{pet.photo_url}}" alt="{{pet.name}} photo" class="img-thumbnail">
+            {% if pet.age %}
+            <span>Age: {{pet.age}}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    {% for msg in get_flashed_messages() %}
+        <small class="text-info">{{msg}}</small>
+    {% endfor %}
+
+    {% for field in form if field.widget.input_type != 'hidden'%}
+        {% if field.errors %}
             <ul>
                 {% for err in field.errors %}
                 <small class="form-text text-danger">
@@ -21,9 +27,12 @@ Add Pet
                 </small>
                 {% endfor %}
             </ul>
-            {% endif %}
-            {% endfor %}
-            
+        {% endif %}
+    {% endfor %}
+
+    <div>
+        <form method="POST">
+            {{ form.hidden_tag() }}
 
             {{form.name.label}}
             {{form.name(class_="form-control")}}
@@ -43,10 +52,11 @@ Add Pet
             {{form.available.label}}
             {{form.available(class_="")}}
             <div>
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary">Edit</button>
             </div>
         </form>
     </div>
-    </div>
+    
 </div>
+
 {% endblock %}

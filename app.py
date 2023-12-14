@@ -26,3 +26,21 @@ def add_pet():
     
     else:
         return render_template('add-pet.html', form=form)
+    
+@app.route('/<int:pet_id>', methods=['GET','POST'])
+def displayEditPet(pet_id):
+    pet = Pet.query.get_or_404(pet_id)
+    form = AddPetForm(obj=pet)
+    if form.validate_on_submit():
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data if form.photo_url.data else "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        db.session.commit()
+
+        flash(f"Edited {pet.name}!")
+        return redirect(f'/{pet_id}')
+    else:
+        return render_template('edit-pet.html', form=form , pet=pet)

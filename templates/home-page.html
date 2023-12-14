@@ -1,6 +1,6 @@
 {% extends 'base.html'  %}
 {% block title %}
-Users
+Pets
 {% endblock%}
 {% block content %}
 <div class="container">
@@ -11,7 +11,7 @@ Users
         
             <div class="col-md-3">
                 <img src="{{pet.photo_url}}" alt="{{pet.name}} photo" class="img-thumbnail">
-                <li><a href="/pets/{{pet.id}}">{{pet.name}}</a></li>
+                <li><a href="/{{pet.id}}">{{pet.name}}</a></li>
             </div>
         {% if pet.availabe%}
         <span>This Pet is Available</span>
