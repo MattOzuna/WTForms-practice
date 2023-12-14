@@ -4,18 +4,19 @@ Pets
 {% endblock%}
 {% block content %}
 <div class="container">
-    <h1>All Pets</h1>
+    <h1 class="display-1 text-center">All Pets</h1>
     <ul>
         <div class="row justify-content-center">
         {% for pet in pets %}
         
             <div class="col-md-3">
                 <img src="{{pet.photo_url}}" alt="{{pet.name}} photo" class="img-thumbnail">
-                <li><a href="/{{pet.id}}">{{pet.name}}</a></li>
+                <li><a href="/{{pet.id}}">{{pet.name}}</a>
+                {% if pet.available %}
+                    <span>is up for adoption!</span>
+                {% endif %}
+                </li>
             </div>
-        {% if pet.availabe%}
-        <span>This Pet is Available</span>
-        {% endif %}
         {% endfor %}
         </div>
     </ul>

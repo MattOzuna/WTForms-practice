@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, render_template
 from models import db, connect_db, Pet
 from forms import AddPetForm
-from services import addPetDataToDB
+from services import addPetDataToDB, editPetData
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "oh-so-secret"
@@ -23,7 +23,6 @@ def add_pet():
     if form.validate_on_submit():
         addPetDataToDB(form)
         return redirect('/')
-    
     else:
         return render_template('add-pet.html', form=form)
     
@@ -32,14 +31,7 @@ def displayEditPet(pet_id):
     pet = Pet.query.get_or_404(pet_id)
     form = AddPetForm(obj=pet)
     if form.validate_on_submit():
-        pet.name = form.name.data
-        pet.species = form.species.data
-        pet.photo_url = form.photo_url.data if form.photo_url.data else "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
-        pet.age = form.age.data
-        pet.notes = form.notes.data
-        pet.available = form.available.data
-        db.session.commit()
-
+        editPetData(form, pet)
         flash(f"Edited {pet.name}!")
         return redirect(f'/{pet_id}')
     else:

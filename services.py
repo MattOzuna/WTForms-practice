@@ -16,3 +16,14 @@ def addPetDataToDB(form):
     
     db.session.add(new_pet)
     db.session.commit()
+
+def editPetData(form, pet):
+    
+    pet.name = form.name.data
+    pet.species = form.species.data
+    pet.photo_url = form.photo_url.data if form.photo_url.data else "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+    pet.age = form.age.data
+    pet.notes = form.notes.data
+    pet.available = form.available.data
+
+    db.session.commit()
