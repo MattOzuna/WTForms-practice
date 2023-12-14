@@ -1,0 +1,34 @@
+{% extends 'base.html'  %}
+{% block title %}
+Add Pet
+{% endblock%}
+{% block content %}
+
+<div class="container">
+    <h1 class="display-1 text-center">Add Pet</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+    
+        <form method="POST">
+            {{ form.hidden_tag() }}
+        
+            {{form.name.label}}
+            {{form.name(class_="form-control")}}
+            {{form.species.label}}
+            {{form.species(class_="form-control")}}
+            {{form.photo_url.label}}
+            {{form.photo_url(class_="form-control")}}
+            {{form.age.label}}
+            {{form.age(class_="form-control")}}
+            {{form.notes.label}}
+            {{form.notes(class_="form-control")}}
+            {{form.available.label}}
+            {{form.available(class_="")}}
+            <div>
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
