@@ -18,7 +18,11 @@ def home_page():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_pet():
-    '''shows form to add pet to db'''
+    '''
+    Shows form to add pet to db.
+    Once the pet info is submitted, checks for validation 
+        and then adds to db and redirects to Home page.
+    '''
     form = AddPetForm()
     if form.validate_on_submit():
         addPetDataToDB(form)
@@ -28,6 +32,11 @@ def add_pet():
     
 @app.route('/<int:pet_id>', methods=['GET','POST'])
 def displayEditPet(pet_id):
+    '''
+    Shows pet information and a edit form below.
+    If the pet info is edited and submited, the data will be changed in the db 
+        and it will redirect back to the pet page.
+    '''
     pet = Pet.query.get_or_404(pet_id)
     form = AddPetForm(obj=pet)
     if form.validate_on_submit():
