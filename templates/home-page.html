@@ -13,7 +13,9 @@ Users
                 <img src="{{pet.photo_url}}" alt="{{pet.name}} photo" class="img-thumbnail">
                 <li><a href="/pets/{{pet.id}}">{{pet.name}}</a></li>
             </div>
-        
+        {% if pet.availabe%}
+        <span>This Pet is Available</span>
+        {% endif %}
         {% endfor %}
         </div>
     </ul>
