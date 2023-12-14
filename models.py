@@ -24,7 +24,8 @@ class Pet(db.Model):
                         nullable=False)
     
     photo_url = db.Column(db.Text,
-                          nullable=True)
+                          nullable=True,
+                          default='https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png')
     
     age = db.Column(db.Integer,
                     nullable=True)

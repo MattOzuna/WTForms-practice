@@ -6,9 +6,16 @@ Users
 <div class="container">
     <h1>All Pets</h1>
     <ul>
+        <div class="row justify-content-center">
         {% for pet in pets %}
-        <li><a href="/pets/{{pet.id}}">{{pet.name}}</a></li>
+        
+            <div class="col-md-3">
+                <img src="{{pet.photo_url}}" alt="{{pet.name}} photo" class="img-thumbnail">
+                <li><a href="/pets/{{pet.id}}">{{pet.name}}</a></li>
+            </div>
+        
         {% endfor %}
+        </div>
     </ul>
     <div>
         <form action="/add">
